@@ -11,7 +11,11 @@ so that your schedules appears automatically in your agenda.
 
 If you'd like me to update any of those files I host online, let me know and I'll get on it (let me know through GitHub, my [website](http://bryankeiren.com/contact) or Facebook (if you know me) or even in person!).
 
-How to use
+If all you want is to use the .ics files provided on http://schedules.bryankeiren.com/, then you don't have to read on! You can just visit that webpage, download or copy the url to your schedule and import it into your favourite digital agenda application!
+
+If you want to use the software itself to manually download and convert schedules or if you want to use or view the source code, read on!
+
+How to use software
 ------------------------
 
 You have two options:
