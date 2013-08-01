@@ -15,7 +15,7 @@ If all you want is to use the .ics files provided on http://schedules.bryankeire
 
 If you want to use the software itself to manually download and convert schedules or if you want to use or view the source code, read on!
 
-How to use software
+How to use the software
 ------------------------
 
 You have two options:
@@ -55,7 +55,7 @@ If the "View output when done" checkbox is checked, the software will automatica
 
 You can now import the .ics files into your digital agenda!
 
-How to build
+How to build the software
 ------------------------
 
 - Open the solution in Visual Studio and build it.
