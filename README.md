@@ -38,8 +38,8 @@ Most (if not all) 'regular' classes should work, however.
 v2.0 Changes
 ------------------------
 
-- Major Changes:
-  - Removed libSICSC and ScheduleICSConverter_CLI projects from solution.
-  - Changed ScheduleICSConverter_GUI to not rely on the CLI project:
-    - Now uses internal code for downloading of rosterpages, parsing of said pages (now using .NET Regex) and storing of .ics files.
-    - Changed GUI layout slightly.
+Major Changes:
+- Removed libSICSC and ScheduleICSConverter_CLI projects from solution.
+- Changed ScheduleICSConverter_GUI to not rely on the CLI project:
+  - Now uses internal code for downloading of rosterpages, parsing of said pages (now using .NET Regex) and storing of .ics files.
+  - Changed GUI layout slightly.
