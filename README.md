@@ -18,7 +18,10 @@ If you want to use the software itself to manually download and convert schedule
 How to use the software
 ------------------------
 
-
+- Open *dist\Debug\SchoolScheduleICSConverter_GUI.exe* or *dist\Release\SchoolScheduleICSConverter_GUI.exe*.
+- Select one or multiple of the classes you wish to get schedules for from the list of classes on the right side.
+- **OPTIONAL:** Select a range of weeks and/or select a start year from the Parse Settings section.
+- Press RUN and wait for the process to complete.
 
 How to build the software
 ------------------------
