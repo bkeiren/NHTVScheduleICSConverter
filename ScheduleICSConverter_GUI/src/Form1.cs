@@ -188,6 +188,8 @@ namespace SchoolScheduleICSConverter_GUI
         {
             BackgroundWorker worker = sender as BackgroundWorker;
 
+            System.IO.Directory.CreateDirectory(GetOutputFolder());
+
             WorkerData workerData = (WorkerData)e.Argument;
             object[] selectedItems = workerData.classes;
             int i = 0;
@@ -225,9 +227,14 @@ namespace SchoolScheduleICSConverter_GUI
             OpenOutputFolder();
         }
 
+        private string GetOutputFolder()
+        {
+            return Application.StartupPath + @"\output";
+        }
+
         private void OpenOutputFolder()
         {
-            Process.Start(Application.StartupPath + @"\output");
+            Process.Start(GetOutputFolder());
         }
     }
 }
