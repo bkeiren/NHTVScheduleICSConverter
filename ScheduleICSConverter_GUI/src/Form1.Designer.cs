@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.consoleAppPath = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.ClassSelection = new System.Windows.Forms.ListBox();
             this.StartOfSchoolYear = new System.Windows.Forms.ComboBox();
@@ -54,58 +50,11 @@
             this.button5 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox1.SuspendLayout();
+            this.openOutputFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.consoleAppPath);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Location = new System.Drawing.Point(13, 40);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(614, 64);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Console Application Folder";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(510, 24);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(98, 29);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Current";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // consoleAppPath
-            // 
-            this.consoleAppPath.AllowDrop = true;
-            this.consoleAppPath.Location = new System.Drawing.Point(10, 28);
-            this.consoleAppPath.Name = "consoleAppPath";
-            this.consoleAppPath.Size = new System.Drawing.Size(390, 22);
-            this.consoleAppPath.TabIndex = 1;
-            this.consoleAppPath.TextChanged += new System.EventHandler(this.consoleAppPath_TextChanged);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(406, 24);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 29);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Browse...";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // folderBrowserDialog1
-            // 
-            this.folderBrowserDialog1.Description = "Select the console application executable folder.";
-            this.folderBrowserDialog1.ShowNewFolderButton = false;
-            this.folderBrowserDialog1.HelpRequest += new System.EventHandler(this.folderBrowserDialog1_HelpRequest);
             // 
             // ClassSelection
             // 
@@ -679,7 +628,7 @@
             "TEST",
             "vpll",
             "vtm4"});
-            this.ClassSelection.Location = new System.Drawing.Point(314, 117);
+            this.ClassSelection.Location = new System.Drawing.Point(314, 41);
             this.ClassSelection.Name = "ClassSelection";
             this.ClassSelection.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.ClassSelection.Size = new System.Drawing.Size(307, 372);
@@ -739,7 +688,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(13, 361);
+            this.button2.Location = new System.Drawing.Point(13, 285);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(270, 61);
             this.button2.TabIndex = 5;
@@ -750,7 +699,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(17, 273);
+            this.checkBox1.Location = new System.Drawing.Point(17, 197);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(176, 21);
             this.checkBox1.TabIndex = 8;
@@ -761,7 +710,7 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 558);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 475);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(635, 22);
             this.statusStrip1.SizingGrip = false;
@@ -780,7 +729,7 @@
             this.groupBox4.Controls.Add(this.SchoolWeekRangeEnd);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.SchoolWeekRangeStart);
-            this.groupBox4.Location = new System.Drawing.Point(12, 110);
+            this.groupBox4.Location = new System.Drawing.Point(12, 34);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(271, 147);
             this.groupBox4.TabIndex = 8;
@@ -792,16 +741,17 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(17, 300);
+            this.checkBox2.Location = new System.Drawing.Point(17, 224);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(266, 21);
             this.checkBox2.TabIndex = 10;
             this.checkBox2.Text = "Hide process window (recommended)";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.Visible = false;
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(13, 500);
+            this.progressBar1.Location = new System.Drawing.Point(13, 424);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(270, 40);
             this.progressBar1.Step = 100;
@@ -810,7 +760,7 @@
             // button6
             // 
             this.button6.Enabled = false;
-            this.button6.Location = new System.Drawing.Point(13, 428);
+            this.button6.Location = new System.Drawing.Point(13, 352);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(270, 61);
             this.button6.TabIndex = 12;
@@ -825,7 +775,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(314, 500);
+            this.button4.Location = new System.Drawing.Point(314, 424);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(151, 40);
             this.button4.TabIndex = 13;
@@ -835,7 +785,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(470, 500);
+            this.button5.Location = new System.Drawing.Point(470, 424);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(151, 40);
             this.button5.TabIndex = 14;
@@ -846,6 +796,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openOutputFolderToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -860,11 +811,18 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // openOutputFolderToolStripMenuItem
+            // 
+            this.openOutputFolderToolStripMenuItem.Name = "openOutputFolderToolStripMenuItem";
+            this.openOutputFolderToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
+            this.openOutputFolderToolStripMenuItem.Text = "Open Output Folder";
+            this.openOutputFolderToolStripMenuItem.Click += new System.EventHandler(this.openOutputFolderToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(635, 580);
+            this.ClientSize = new System.Drawing.Size(635, 497);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.ClassSelection);
@@ -875,7 +833,6 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -885,8 +842,6 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "NHTV Schedule ICS Converter GUI";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -900,9 +855,6 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox consoleAppPath;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.ListBox ClassSelection;
         private System.Windows.Forms.ComboBox StartOfSchoolYear;
@@ -916,7 +868,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button button6;
@@ -925,6 +876,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openOutputFolderToolStripMenuItem;
     }
 }
 

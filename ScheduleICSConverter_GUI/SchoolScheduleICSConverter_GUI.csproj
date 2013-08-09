@@ -62,6 +62,7 @@
     <Compile Include="src\AboutBox1.Designer.cs">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\Appointment.cs" />
     <Compile Include="src\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +96,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="src\ScheduleConverter.cs" />
     <Compile Include="src\WorkerData.cs" />
   </ItemGroup>
   <ItemGroup>
