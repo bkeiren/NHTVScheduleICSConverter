@@ -39,7 +39,7 @@ v2.0 Changes
 ------------------------
 
 Major Changes:
-- Removed libSICSC and ScheduleICSConverter_CLI projects from solution.
+- Removed libSICSC and ScheduleICSConverter_CLI projects from solution (Note that this means no more command-line support!).
 - Changed ScheduleICSConverter_GUI to not rely on the CLI project:
   - Now uses internal code for downloading of rosterpages, parsing of said pages (now using .NET Regex) and storing of .ics files.
   - Changed GUI layout slightly.
