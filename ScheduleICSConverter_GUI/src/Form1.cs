@@ -16,8 +16,6 @@ namespace SchoolScheduleICSConverter_GUI
         const int ERROR_FILE_NOT_FOUND = 2;
         const int ERROR_ACCESS_DENIED = 5;
 
-        private string ExePath = string.Empty;
-
         System.Threading.SynchronizationContext formSynchronizationContext;
 
         public Form1()
@@ -30,7 +28,6 @@ namespace SchoolScheduleICSConverter_GUI
             formSynchronizationContext = WindowsFormsSynchronizationContext.Current;
 
             checkBox1.Checked = true;
-//          consoleAppPath.Text = Application.ExecutablePath;
 
             int CurrentYear = DateTime.Now.Year;
             int StartYearOfComboBox = 2012;
@@ -53,32 +50,8 @@ namespace SchoolScheduleICSConverter_GUI
             SchoolWeekRangeEnd.SelectedIndex = 52;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            DialogResult res = folderBrowserDialog1.ShowDialog();
-            if (res == DialogResult.OK)
-            {
-                consoleAppPath.Text = folderBrowserDialog1.SelectedPath;
-            }
-        }
-
-        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
-        {
-            
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
-            if (consoleAppPath.Text == string.Empty)
-            {
-                toolStripStatusLabel1.Text = "Select the console application folder";
-                button1_Click(null, null);
-                if (consoleAppPath.Text == string.Empty)
-                {
-                    return;
-                }
-            }
-
             ListBox.SelectedObjectCollection selectedItems = ClassSelection.SelectedItems;
             if (selectedItems.Count <= 0)
             {
@@ -96,6 +69,7 @@ namespace SchoolScheduleICSConverter_GUI
                 workerData.endweek= SchoolWeekRangeEnd.Text.ToString();
                 button6.Enabled = true;
                 backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.WorkerThreadCompleted);
+                button2.Enabled = false;
                 backgroundWorker1.RunWorkerAsync(workerData);
             }            
         }
@@ -129,7 +103,7 @@ namespace SchoolScheduleICSConverter_GUI
             {
                 try
                 {
-                    Process.Start(consoleAppPath.Text + @"\output");
+                    OpenOutputFolder();
                 }
                 catch (Win32Exception exception)
                 {
@@ -159,6 +133,8 @@ namespace SchoolScheduleICSConverter_GUI
                     }
                 }
             }
+
+            button2.Enabled = true;
         }
 
         private void WorkerThreadCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -169,11 +145,6 @@ namespace SchoolScheduleICSConverter_GUI
         private void UpdateProgressBar( object obj )
         {
             progressBar1.Value = (int)obj;
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            consoleAppPath.Text = Application.StartupPath;
         }
 
         private void SelectOrDeselectEntireClassSelection( bool _SelectAll )
@@ -209,7 +180,7 @@ namespace SchoolScheduleICSConverter_GUI
         private void ReportWorkerThreadStatus( object obj )
         {
             string msg = (string)obj;
-            toolStripStatusLabel1.Text = msg;
+            toolStripStatusLabel1.Text = "Progress: " + msg;
             Log.Info("Background Worker progress: " + msg);
         }
 
@@ -228,7 +199,7 @@ namespace SchoolScheduleICSConverter_GUI
                     break;
                 }
                 ++i;
-                string classCode = selectedItem.ToString().Replace(" ", "%20");
+                string classCode = selectedItem.ToString()/*.Replace(" ", "%20")*/;
 
                 if (classCode == string.Empty)
                 {
@@ -236,74 +207,27 @@ namespace SchoolScheduleICSConverter_GUI
                     continue;
                 }
 
-                ProcessStartInfo StartInfo = new ProcessStartInfo();
-                StartInfo.FileName = ExePath;
-                StartInfo.ErrorDialog = true;
-                StartInfo.WorkingDirectory = consoleAppPath.Text;
-                if (checkBox2.Checked)
-                {
-                    StartInfo.CreateNoWindow = true;
-                    StartInfo.RedirectStandardOutput = true;
-                    StartInfo.UseShellExecute = false;
-                }
-                StartInfo.Arguments = "1 " +
-                                                classCode +
-                                                " " +
-                                                workerData.startyear +
-                                                " " +
-                                                workerData.startweek +
-                                                " " +
-                                                workerData.endweek;
+                ScheduleConverter.ProcessClassSchedule(classCode, workerData.startyear, workerData.startweek, workerData.endweek);
 
-                Process process = null;
-                try
-                {
-                    process = Process.Start(StartInfo);
-                    process.EnableRaisingEvents = true;
-                    //process.Exited += new EventHandler(this.cliProcessExited);
-                }
-                catch (Win32Exception exception)
-                {
-                    switch (exception.NativeErrorCode)
-                    {
-                        case ERROR_FILE_NOT_FOUND:
-                            {
-                                formSynchronizationContext.Post(this.workerThreadException, "Could not find executable file in specified folder");
-                                break;
-                            }
-                        case ERROR_ACCESS_DENIED:
-                            {
-                                formSynchronizationContext.Post(this.workerThreadException, "System denied access to executable file");
-                                break;
-                            }
-                        default:
-                            {
-                                formSynchronizationContext.Post(this.workerThreadException, "I didn't bother writing a message for this error code (" + exception.NativeErrorCode.ToString() + ")");
-                                break;
-                            }
-                    }
-                    return;
-                }
-                string progressString = "In progress... (" + i.ToString() + "/" + selectedItems.Length + ")";
-                formSynchronizationContext.Post(this.ReportWorkerThreadStatus, progressString);
-                if (process != null)
-                {
-                    process.WaitForExit();
-                    Log.Info("Process ouput:\n" + process.StandardOutput.ReadToEnd());
-                }
                 formSynchronizationContext.Post(this.UpdateProgressBar, (int)(((float)i / selectedItems.Length) * 100.0f));
+                formSynchronizationContext.Post(this.ReportWorkerThreadStatus, "(" + (i + 1) + "/" + selectedItems.Length + ")");
             }
-        }
-
-        private void consoleAppPath_TextChanged(object sender, EventArgs e)
-        {
-            ExePath = consoleAppPath.Text + @"\ScheduleICSConverter_CLI.exe";
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutBox1 about = new AboutBox1();
             about.Show();
+        }
+
+        private void openOutputFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenOutputFolder();
+        }
+
+        private void OpenOutputFolder()
+        {
+            Process.Start(Application.StartupPath + @"\output");
         }
     }
 }
