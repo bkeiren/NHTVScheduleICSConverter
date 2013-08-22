@@ -212,7 +212,7 @@ namespace SchoolScheduleICSConverter_GUI
                 ScheduleConverter.ProcessClassSchedule(classCode, workerData.startyear, workerData.startweek, workerData.endweek);
 
                 formSynchronizationContext.Post(this.UpdateProgressBar, (int)(((float)i / selectedItems.Length) * 100.0f));
-                formSynchronizationContext.Post(this.ReportWorkerThreadStatus, "(" + (i + 1) + "/" + selectedItems.Length + ")");
+                formSynchronizationContext.Post(this.ReportWorkerThreadStatus, "(" + i + "/" + selectedItems.Length + ")");
             }
         }
 
