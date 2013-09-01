@@ -35,7 +35,7 @@ Note that not each of the listed classcodes will result in an iCalendar file. Th
 Most (if not all) 'regular' classes should work, however.
 
 
-v2.0 Changes
+Changes from IGADScheduleICSConverter -> NHTVScheduleICSConverter
 ------------------------
 
 Major Changes:
