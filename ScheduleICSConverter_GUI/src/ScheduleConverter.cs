@@ -45,11 +45,14 @@ namespace SchoolScheduleICSConverter_GUI
             return appointments;
         }
 
-        private static string ConstructICALString(List<Appointment> _Appointments, int _StartYear)
+        private static string ConstructICALString(List<Appointment> _Appointments, int _StartYear, string _ClassCode)
         {
             string iCal = "BEGIN:VCALENDAR\n" +
-                            "VERSION:2.0\n" +
-                            "PRODID:BKEIRENSCHOOLSCHEDULEAPP\n";
+                          "VERSION:2.0\n" +
+                          "PRODID:-//Bryan Keiren//NHTV Schedule ICS Converter V1.0//EN\n" +
+                          "X-WR-CALNAME:" + _ClassCode + " Schedule\n" +
+                          "X-PUBLISHED-TTL:PT6H\n" +
+                          "CALSCALE:GREGORIAN\n";
 
             foreach (Appointment appointment in _Appointments)
             {
@@ -157,7 +160,7 @@ namespace SchoolScheduleICSConverter_GUI
             List<Appointment> appointments = ExtractAppointments(HTMLString);
 
             // Construct an iCal string from the appointments.
-            string iCalString = ConstructICALString(appointments, System.Int32.Parse(_StartYear));
+            string iCalString = ConstructICALString(appointments, System.Int32.Parse(_StartYear), _ClassCode);
 
             string OutputFile = "output\\" + _ClassCode + ".ics";
             OutputFile = OutputFile.Replace(" ", "_");  // For backwards-compatibility with previous versions of the converter.
